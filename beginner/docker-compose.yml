@@ -1,0 +1,87 @@
+version: '3.3'
+
+services:
+   db:
+     image: mongo:latest
+     volumes:
+       - db_data:/data/db
+     restart: always
+     ports:
+       - "9000:27017"
+     environment:
+       MONGO_INITDB_ROOT_USERNAME: root
+       MONGO_INITDB_ROOT_PASSWORD: example
+   amqp:
+     image: rabbitmq:3-management
+     volumes:
+       - queue_data:/var/lib/rabbitmq
+     restart: always
+     ports:
+       - "5672:5672"
+       - "15672:15672"
+     environment:
+       RABBITMQ_DEFAULT_USER: user
+       RABBITMQ_DEFAULT_PASS: password
+   consumer:
+     depends_on:
+       - db
+       - amqp
+     build:
+      context: ./nodejs-app/consumer
+     image: bijoypaul/kubernetes-beginner-consumer:latest
+     restart: always
+     environment:
+       QUEUE_NAME: contact_event_queue
+       MONGO_HOST: db
+       MONGO_PORT: 27017
+       RABBIT_HOST: amqp
+       RABBIT_PORT: 5672
+       RABBIT_USER: user
+       RABBIT_PASSWORD: password
+   reader:
+     depends_on:
+       - db
+     build:
+      context: ./nodejs-app/content-reader
+     image: bijoypaul/kubernetes-beginner-reader:latest
+     restart: always
+     ports:
+       - "8080:8080"
+     environment:
+       APP_PORT: 8080
+       API_PATH: /reader
+       MONGO_HOST: db
+       MONGO_PORT: 27017
+   writer:
+     depends_on:
+       - db
+       - amqp
+     build:
+      context: ./nodejs-app/content-writer
+     image: bijoypaul/kubernetes-beginner-writer:latest
+     restart: always
+     ports:
+       - "8081:8081"
+     environment:
+       APP_PORT: 8081
+       API_PATH: /writer
+       QUEUE_NAME: contact_event_queue
+       MONGO_HOST: db
+       MONGO_PORT: 27017
+       RABBIT_HOST: amqp
+       RABBIT_PORT: 5672
+       RABBIT_USER: user
+       RABBIT_PASSWORD: password
+   frontend:
+     depends_on:
+       - reader
+       - writer
+     build:
+      context: ./react-app
+     image: bijoypaul/kubernetes-beginner-frontend:latest
+     restart: always
+     ports:
+       - "7000:3000"
+volumes:
+    db_data: {}
+    queue_data: {}
