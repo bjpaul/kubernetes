@@ -6,8 +6,8 @@ services:
      volumes:
        - db_data:/data/db
      restart: always
-     ports:
-       - "9000:27017"
+    #  ports:
+    #    - "9000:27017"
      environment:
        MONGO_INITDB_ROOT_USERNAME: root
        MONGO_INITDB_ROOT_PASSWORD: example
@@ -17,7 +17,7 @@ services:
        - queue_data:/var/lib/rabbitmq
      restart: always
      ports:
-       - "5672:5672"
+      #  - "5672:5672"
        - "15672:15672"
      environment:
        RABBITMQ_DEFAULT_USER: user
