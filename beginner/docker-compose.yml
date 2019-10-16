@@ -28,7 +28,7 @@ services:
        - amqp
      build:
       context: ./nodejs-app/consumer
-     image: bijoypaul/kubernetes-beginner-consumer:latest
+     image: bijoydocker/kubernetes-beginner-consumer:latest
      restart: always
      environment:
        QUEUE_NAME: contact_event_queue
@@ -45,7 +45,7 @@ services:
        - db
      build:
       context: ./nodejs-app/content-reader
-     image: bijoypaul/kubernetes-beginner-reader:latest
+     image: bijoydocker/kubernetes-beginner-reader:latest
      restart: always
      ports:
        - "8080:8080"
@@ -62,7 +62,7 @@ services:
        - amqp
      build:
       context: ./nodejs-app/content-writer
-     image: bijoypaul/kubernetes-beginner-writer:latest
+     image: bijoydocker/kubernetes-beginner-writer:latest
      restart: always
      ports:
        - "8081:8081"
@@ -84,7 +84,7 @@ services:
        - writer
      build:
       context: ./react-app
-     image: bijoypaul/kubernetes-beginner-frontend:latest
+     image: bijoydocker/kubernetes-beginner-frontend:latest
      restart: always
      ports:
        - "7000:3000"
