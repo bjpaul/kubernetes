@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: reader
+spec:
+  selector:
+    app: reader
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: NodePort
+---
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: reader
+spec:
+  selector:
+    matchLabels:
+      app: reader
+      version: 1.0.0
+  replicas: 1
+  template:
+    metadata:
+      # namespace: dev
+      labels:
+        app: reader
+        version: 1.0.0
+    spec:
+      containers:
+        - name: reader
+          image: bijoydocker/kubernetes-beginner-reader:latest
+          ports:
+            - containerPort: 8080
+          env:
+              # Use secret in real usage
+            - name: APP_PORT
+              value: "8080"
+            - name: API_PATH
+              value: /reader
+            - name: MONGO_HOST
+              value: db
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_USERNAME
+              value: root
+            - name: MONGO_PASSWORD
+              value: example
+      nodeSelector:
+        node-type: app

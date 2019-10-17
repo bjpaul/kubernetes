@@ -1,0 +1,42 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: consumer
+spec:
+  selector:
+    matchLabels:
+      app: consumer
+      version: 1.0.0
+  replicas: 1
+  template:
+    metadata:
+      # namespace: dev
+      labels:
+        app: consumer
+        version: 1.0.0
+    spec:
+      containers:
+        - name: consumer
+          image: bijoydocker/kubernetes-beginner-consumer:latest
+          env:
+              # Use secret in real usage
+            - name: MONGO_HOST
+              value: db
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_USERNAME
+              value: root
+            - name: MONGO_PASSWORD
+              value: example
+            - name: RABBIT_HOST
+              value: queue
+            - name: RABBIT_PASSWORD
+              value: "5672"
+            - name: RABBIT_USER
+              value: user
+            - name: RABBIT_PASSWORD
+              value: password
+            - name: QUEUE_NAME
+              value: contact_event_queue
+      nodeSelector:
+        node-type: app
