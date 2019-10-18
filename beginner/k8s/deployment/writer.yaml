@@ -1,25 +1,32 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: consumer
+  name: writer
 spec:
   selector:
     matchLabels:
-      app: consumer
+      app: writer
       version: 1.0.0
   replicas: 1
   template:
     metadata:
       # namespace: dev
       labels:
-        app: consumer
+        app: writer
         version: 1.0.0
     spec:
       containers:
-        - name: consumer
-          image: bijoydocker/kubernetes-beginner-consumer:latest
+        - name: writer
+          image: bijoydocker/kubernetes-beginner-writer:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
           env:
               # Use secret in real usage
+            - name: APP_PORT
+              value: "8081"
+            - name: API_PATH
+              value: /writer
             - name: MONGO_HOST
               value: db
             - name: MONGO_PORT
