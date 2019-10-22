@@ -89,8 +89,8 @@ services:
      ports:
        - "7000:3000"
      environment:
-       WRITER_HOST: writer
-       READER_HOST: reader
+       WRITER_HOST: demo-kube
+       READER_HOST: demo-kube
 volumes:
     db_data: {}
     queue_data: {}
