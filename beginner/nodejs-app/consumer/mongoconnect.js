@@ -16,7 +16,7 @@ var db = mongoose.connection;
 // When successfully connected
   db.on('connected', function () {  
     console.log('Connected successfully!!!');
-  }); 
+  });
   
   // If the connection throws an error
   db.on('error',function (err) {  

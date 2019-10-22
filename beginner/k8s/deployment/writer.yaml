@@ -21,6 +21,37 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8081
+          #containers are restarted when they fail
+          # https://medium.com/spire-labs/utilizing-kubernetes-liveness-and-readiness-probes-to-automatically-recover-from-failure-2fe0314f2b2e
+          # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#probe-v1-core
+          # https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/
+          # Indicates whether the Container is running. 
+          # If the liveness probe fails, the kubelet kills the Container, and the Container is subjected to its restart policy. 
+          # If a Container does not provide a liveness probe, the default state is Success.
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8081
+              # httpHeaders:
+              # - name: Custom-Header
+              #   value: Awesome
+            initialDelaySeconds: 30 # default is 0
+            periodSeconds: 30 #default is 10
+            timeoutSeconds: 5 #default is 1
+            successThreshold: 1 # default is 1
+            failureThreshold: 3 # default is 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8081
+              # httpHeaders:
+              # - name: Custom-Header
+              #   value: Awesome
+            initialDelaySeconds: 10 # default is 0
+            periodSeconds: 5 #default is 10
+            timeoutSeconds: 5 #default is 1
+            successThreshold: 3 # default is 1
+            failureThreshold: 5 # default is 3
           env:
               # Use secret in real usage
             - name: APP_PORT
