@@ -16,9 +16,9 @@ services:
      volumes:
        - queue_data:/var/lib/rabbitmq
      restart: always
-     ports:
+    #  ports:
       #  - "5672:5672"
-       - "15672:15672"
+      #  - "15672:15672"
      environment:
        RABBITMQ_DEFAULT_USER: user
        RABBITMQ_DEFAULT_PASS: password
@@ -28,7 +28,7 @@ services:
        - amqp
      build:
       context: ./nodejs-app/consumer
-     image: bijoydocker/kubernetes-beginner-consumer:latest
+     image: bijoydocker/kubernetes-beginner-consumer:advance
      restart: always
      environment:
        QUEUE_NAME: contact_event_queue
@@ -45,10 +45,10 @@ services:
        - db
      build:
       context: ./nodejs-app/content-reader
-     image: bijoydocker/kubernetes-beginner-reader:latest
+     image: bijoydocker/kubernetes-beginner-reader:advance
      restart: always
-     ports:
-       - "8080:8080"
+    #  ports:
+    #    - "8080:8080"
      environment:
        APP_PORT: 8080
        API_PATH: /reader
@@ -62,10 +62,10 @@ services:
        - amqp
      build:
       context: ./nodejs-app/content-writer
-     image: bijoydocker/kubernetes-beginner-writer:latest
+     image: bijoydocker/kubernetes-beginner-writer:advance
      restart: always
-     ports:
-       - "8081:8081"
+    #  ports:
+    #    - "8081:8081"
      environment:
        APP_PORT: 8081
        API_PATH: /writer
@@ -84,13 +84,20 @@ services:
        - writer
      build:
       context: ./react-app
-     image: bijoydocker/kubernetes-beginner-frontend:latest
+     image: bijoydocker/kubernetes-beginner-frontend:advance
      restart: always
-     ports:
-       - "7000:3000"
-     environment:
-       WRITER_HOST: demo-kube
-       READER_HOST: demo-kube
+   web:
+      depends_on:
+        - frontend
+        - reader
+        - writer
+      build:
+        context: ./nginx
+      image: bijoydocker/kubernetes-beginner-web:advance
+      restart: always
+      ports:
+        - "443:443"
+        - "8000:80"
 volumes:
     db_data: {}
     queue_data: {}

@@ -8,12 +8,12 @@
 // let READER_PORT = process.env.READER_PORT || 8080
 // module.exports.READER_ENDPOINT = READER_PROTOCOL+READER_HOST+':'+READER_PORT
 
-let WRITER_PROTOCOL = "http://"
-let WRITER_HOST = "demo-kube"
-let WRITER_PORT = "31235"
+let WRITER_PROTOCOL = "https://"
+let WRITER_HOST = "demo-kube.com"
+let WRITER_PORT = ""
 module.exports.WRITER_ENDPOINT = WRITER_PROTOCOL+WRITER_HOST+':'+WRITER_PORT
 
-let READER_PROTOCOL = "http://"
-let READER_HOST = "demo-kube"
-let READER_PORT = "31234"
+let READER_PROTOCOL = "https://"
+let READER_HOST = "demo-kube.com"
+let READER_PORT = ""
 module.exports.READER_ENDPOINT = READER_PROTOCOL+READER_HOST+':'+READER_PORT
