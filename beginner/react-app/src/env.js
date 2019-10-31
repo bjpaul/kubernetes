@@ -10,10 +10,10 @@
 
 let WRITER_PROTOCOL = "https://"
 let WRITER_HOST = "demo-kube.com"
-let WRITER_PORT = ""
+let WRITER_PORT = "30443"
 module.exports.WRITER_ENDPOINT = WRITER_PROTOCOL+WRITER_HOST+':'+WRITER_PORT
 
 let READER_PROTOCOL = "https://"
 let READER_HOST = "demo-kube.com"
-let READER_PORT = ""
+let READER_PORT = "30443"
 module.exports.READER_ENDPOINT = READER_PROTOCOL+READER_HOST+':'+READER_PORT

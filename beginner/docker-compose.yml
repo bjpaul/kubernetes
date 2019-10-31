@@ -96,8 +96,8 @@ services:
       image: bijoydocker/kubernetes-beginner-web:advance
       restart: always
       ports:
-        - "443:443"
-        - "8000:80"
+        - "30443:443"
+        - "30080:80"
 volumes:
     db_data: {}
     queue_data: {}

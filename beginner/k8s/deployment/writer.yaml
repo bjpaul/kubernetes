@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: writer
-          image: bijoydocker/kubernetes-beginner-writer:latest
+          image: bijoydocker/kubernetes-beginner-writer:advance
           imagePullPolicy: Always
           ports:
             - containerPort: 8081
