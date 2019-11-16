@@ -66,4 +66,4 @@ spec:
             - name: MONGO_PASSWORD
               value: example
       nodeSelector:
-        node-type: app
+        node-role.kubernetes.io/node: app

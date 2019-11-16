@@ -151,3 +151,6 @@ kubectl delete node <node name>
 #on the respective node: 
 kubeadm reset
 ```
+
+## **Start deploying applications**
+### Go to see [orchestration](beginner/k8s/) :

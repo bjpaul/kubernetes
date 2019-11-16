@@ -53,4 +53,4 @@ spec:
             successThreshold: 3 # default is 1
             failureThreshold: 5 # default is 3
       nodeSelector:
-        node-type: app
+        node-role.kubernetes.io/node: app

@@ -1,12 +1,12 @@
-kubectl label nodes <node-name> node-type=storage
-kubectl label nodes <node-name> node-type=app
+kubectl label nodes <node-name> node-role.kubernetes.io/node=storage
+kubectl label nodes <node-name> node-role.kubernetes.io/node=app
 
-kubectl apply -f namespace.yml
+
+kubectl apply -f namespace.yaml
 kubectl create -f storage.yml --namespace=dev
 ## equicalent to kubectl expose deployment/db-deployment
 
-kubectl apply -f consumer.yml --namespace=dev
-kubectl apply -f writer.yml --namespace=dev
+kubectl apply -f deployment/ --namespace=dev
 
 Get Node IP: kubectl get pods -n dev -o wide | grep writer
 NAME                        READY   STATUS    RESTARTS   AGE   IP                NODE               NOMINATED NODE   READINESS GATES

@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: db
 spec:
-  # clusterIP: None
+  clusterIP: None
   selector:
     app: db
   ports:
@@ -48,14 +48,14 @@ spec:
         - name: db-data
           emptyDir: {}
       nodeSelector:
-        node-type: storage
+        node-role.kubernetes.io/node: storage
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: queue
 spec:
-  # clusterIP: None
+  clusterIP: None
   selector:
     app: amqp
   ports:
@@ -105,4 +105,4 @@ spec:
         - name: queue-data
           emptyDir: {}
       nodeSelector:
-        node-type: storage
+        node-role.kubernetes.io/node: storage

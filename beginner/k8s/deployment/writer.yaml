@@ -77,4 +77,4 @@ spec:
             - name: QUEUE_NAME
               value: contact_event_queue
       nodeSelector:
-        node-type: app
+        node-role.kubernetes.io/node: app
