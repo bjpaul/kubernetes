@@ -3,10 +3,11 @@ kubectl label nodes <node-name> node-role.kubernetes.io/node=app
 
 
 kubectl apply -f namespace.yaml
-kubectl create -f storage.yml --namespace=dev
+kubectl create -f storage.yaml --namespace=dev
 ## equicalent to kubectl expose deployment/db-deployment
 
 kubectl apply -f deployment/ --namespace=dev
+kubectl apply -f service/nodeport/ --namespace=dev
 
 Get Node IP: kubectl get pods -n dev -o wide | grep writer
 NAME                        READY   STATUS    RESTARTS   AGE   IP                NODE               NOMINATED NODE   READINESS GATES
@@ -21,18 +22,4 @@ NOTE:
 
 Test app output: curl http://<node-public-ip>:<node-dynamic-port> ==>> Hello World with Express
 
-Test same after adding new node in the same cluster with label node-type=app
-After testing drain the node by runing following command
-on Master:- 
-kubectl drain ip-172-31-0-171 --delete-local-data --force --ignore-daemonsets
-kubectl delete node ip-172-31-0-171
 
-on the specific node:-
-sudo kubeadm reset
-
-and check cluster status:-
-kubectl get nodes
-
-Now Deploy reader 
-kubectl apply -f writer.yml --namespace=dev
-and test same as writer
