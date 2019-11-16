@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: reader
-          image: bijoydocker/kubernetes-beginner-reader:latest
+          image: bijoydocker/kubernetes-beginner-reader:advance
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

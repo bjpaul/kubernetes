@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: bijoydocker/kubernetes-beginner-frontend:latest
+          image: bijoydocker/kubernetes-beginner-frontend:advance
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
@@ -51,6 +51,5 @@ spec:
             timeoutSeconds: 5 #default is 1
             successThreshold: 3 # default is 1
             failureThreshold: 5 # default is 3
-          
       nodeSelector:
         node-type: app

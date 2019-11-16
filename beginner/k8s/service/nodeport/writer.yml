@@ -8,10 +8,10 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      # Which port on the node is the service available through?
-      nodePort: 31235 #optional, if skipped random port will allocate(default: 30000-32767)
+  #     # Which port on the node is the service available through?
+  #     nodePort: 31235 #optional, if skipped random port will allocate(default: 30000-32767)
       # Inside the cluster, what port does the service expose?
       port: 8081
       # Which port do pods selected by this service expose?
       targetPort: 8081
-  type: NodePort
+  type: ClusterIP

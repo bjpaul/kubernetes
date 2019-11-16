@@ -1,25 +1,27 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: consumer
+  name: web
 spec:
   selector:
     matchLabels:
-      app: consumer
+      app: web
       version: 1.0.0
   replicas: 1
   template:
     metadata:
       # namespace: dev
       labels:
-        app: consumer
+        app: web
         version: 1.0.0
     spec:
       containers:
-        - name: consumer
-          image: bijoydocker/kubernetes-beginner-consumer:advance
+        - name: web
+          image: bijoydocker/kubernetes-beginner-web:advance
           imagePullPolicy: Always
-          #containers are restarted when they fail
+          ports:
+            - containerPort: 443
+            - containerPort: 80
           # https://medium.com/spire-labs/utilizing-kubernetes-liveness-and-readiness-probes-to-automatically-recover-from-failure-2fe0314f2b2e
           # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#probe-v1-core
           # https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/
@@ -27,10 +29,9 @@ spec:
           # If the liveness probe fails, the kubelet kills the Container, and the Container is subjected to its restart policy. 
           # If a Container does not provide a liveness probe, the default state is Success.
           livenessProbe:
-            exec:
-              command:
-                - /usr/local/bin/node
-                - /app/healthy.js
+            httpGet:
+              path: /server_status
+              port: 80
               # httpHeaders:
               # - name: Custom-Header
               #   value: Awesome
@@ -39,25 +40,17 @@ spec:
             timeoutSeconds: 5 #default is 1
             successThreshold: 1 # default is 1
             failureThreshold: 3 # default is 3
-          env:
-              # Use secret in real usage
-            - name: MONGO_HOST
-              value: db
-            - name: MONGO_PORT
-              value: "27017"
-            - name: MONGO_USERNAME
-              value: root
-            - name: MONGO_PASSWORD
-              value: example
-            - name: RABBIT_HOST
-              value: queue
-            - name: RABBIT_PASSWORD
-              value: "5672"
-            - name: RABBIT_USER
-              value: user
-            - name: RABBIT_PASSWORD
-              value: password
-            - name: QUEUE_NAME
-              value: contact_event_queue
+          readinessProbe:
+            httpGet:
+              path: /server_status
+              port: 80
+              # httpHeaders:
+              # - name: Custom-Header
+              #   value: Awesome
+            initialDelaySeconds: 10 # default is 0
+            periodSeconds: 5 #default is 10
+            timeoutSeconds: 5 #default is 1
+            successThreshold: 3 # default is 1
+            failureThreshold: 5 # default is 3
       nodeSelector:
         node-type: app
