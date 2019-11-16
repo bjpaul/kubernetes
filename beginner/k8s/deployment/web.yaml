@@ -18,10 +18,19 @@ spec:
       containers:
         - name: web
           image: bijoydocker/kubernetes-beginner-web:advance
+          lifecycle:
+            prestop:
+              exec:
+                command: ["/usr/sbin/nginx","-s","quit"] 
           imagePullPolicy: Always
           ports:
             - containerPort: 443
             - containerPort: 80
+          volumeMounts:
+            - name: "nginx-resolver-conf"
+              mountPath: "/etc/nginx/conf.d"
+            - name: "my-app-certs"
+              mountPath: "/etc/nginx/ssl"
           # https://medium.com/spire-labs/utilizing-kubernetes-liveness-and-readiness-probes-to-automatically-recover-from-failure-2fe0314f2b2e
           # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#probe-v1-core
           # https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/
