@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
+      name: web
       app: web
       version: 1.0.0
   replicas: 1

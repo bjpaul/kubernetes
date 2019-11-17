@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
+      name: writer
       app: writer
       version: 1.0.0
   replicas: 1

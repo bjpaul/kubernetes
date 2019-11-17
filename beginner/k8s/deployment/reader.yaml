@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
+      name: reader
       app: reader
       version: 1.0.0
   replicas: 1
