@@ -5,7 +5,6 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: consumer
       app: consumer
       version: 1.0.0
   replicas: 1
@@ -21,6 +20,7 @@ spec:
       # namespace: dev
       labels:
         app: consumer
+        name: consumer
         version: 1.0.0
     spec:
       containers:

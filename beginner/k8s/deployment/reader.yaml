@@ -21,6 +21,7 @@ spec:
       # namespace: dev
       labels:
         app: reader
+        name: reader
         version: 1.0.0
     spec:
       containers:

@@ -21,6 +21,7 @@ spec:
       # namespace: dev
       labels:
         app: frontend
+        name: frontend
         version: 1.0.0
     spec:
       containers:
