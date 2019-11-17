@@ -25,7 +25,7 @@ spec:
           volumeMounts:
             - name: "resolver-conf"
               readOnly: true
-              mountPath: "/etc/nginx/conf.d"
+              mountPath: "/etc/nginx/resolver/"
             - name: "tls-certs"
               readOnly: true
               mountPath: "/etc/nginx/ssl"
@@ -66,5 +66,8 @@ spec:
         - name: "resolver-conf"
           configMap:
             name: "nginx-resolver-conf"
+            items:
+              - key: "resolver.conf"
+                path: "resolver.conf"
       nodeSelector:
         node-role.kubernetes.io/node: app

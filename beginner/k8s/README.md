@@ -4,7 +4,12 @@ kubectl label nodes <node-name> node-role.kubernetes.io/node=app
 
 kubectl apply -f namespace.yaml
 kubectl create -f storage.yaml --namespace=dev
-kubectl create secret generic my-app-certs -n dev --from-file=config/ssl/
+
+#kubectl delete secret my-app-certs -n dev
+kubectl create secret generic my-app-certs -n dev --from-file=config/ssl
+
+#update the resolver ip in the conf and create config map
+#kubectl delete configmap nginx-resolver-conf -n dev
 kubectl create configmap nginx-resolver-conf -n dev --from-file=config/nginx/resolver.conf
 
 ## equicalent to kubectl expose deployment/db-deployment
