@@ -183,3 +183,7 @@ serviceaccount/calico-kube-controllers created
 
 ## **Start deploying applications**
 ### Go to see [orchestration](beginner/k8s/) :
+
+#https://www.youtube.com/watch?v=_wySvT2uqyM&list=PLbzoR-pLrL6pzA9DX7Jgo0I-CPE8HU0G_
+#https://kubedex.com/
+#http://kubernetesbyexample.com/

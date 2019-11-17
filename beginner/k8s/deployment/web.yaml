@@ -44,7 +44,7 @@ spec:
           # If a Container does not provide a liveness probe, the default state is Success.
           livenessProbe:
             httpGet:
-              path: /server_status
+              path: /is_live
               port: 80
               # httpHeaders:
               # - name: Custom-Header
@@ -56,7 +56,7 @@ spec:
             failureThreshold: 3 # default is 3
           readinessProbe:
             httpGet:
-              path: /server_status
+              path: /is_ready
               port: 80
               # httpHeaders:
               # - name: Custom-Header
