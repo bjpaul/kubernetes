@@ -1,4 +1,5 @@
 ```
+
 #cat ../config/ssl/nginx-selfsigned.key | base64 | tr -d '\n' > cert.demo-kube.com.key
 #cat ../config/ssl/nginx-selfsigned.crt | base64 | tr -d '\n' > cert.demo-kube.com.crt
 

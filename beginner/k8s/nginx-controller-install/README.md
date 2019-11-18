@@ -1,3 +1,7 @@
+##Optional
+```
+kubectl delete -f ../service/nodeport/web.yml -n dev
+```
 https://kubernetes.github.io/ingress-nginx
 
 https://github.com/nginxinc/kubernetes-ingress/blob/master/docs/installation.md

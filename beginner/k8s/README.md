@@ -3,7 +3,8 @@ kubectl label nodes <node-name> node-role.kubernetes.io/node=app
 
 
 kubectl apply -f namespace.yaml
-kubectl create -f storage.yaml --namespace=dev
+kubectl apply -f storage.yaml --namespace=dev
+kubectl apply -f network/ --namespace=dev
 
 #kubectl delete secret my-app-certs -n dev
 kubectl create secret generic my-app-certs -n dev --from-file=config/ssl
