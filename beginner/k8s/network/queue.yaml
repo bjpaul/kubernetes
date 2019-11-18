@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: queue-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: amqp
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app-type: backend
+    ports:
+    - protocol: TCP
+      port: 15672
+    - protocol: TCP
+      port: 5672

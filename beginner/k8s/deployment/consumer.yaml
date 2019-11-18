@@ -23,6 +23,7 @@ spec:
       # namespace: dev
       labels:
         app: consumer
+        app-type: backend
         name: consumer
         version: 1.0.0
     spec:
@@ -53,7 +54,7 @@ spec:
           env:
               # Use secret in real usage
             - name: MONGO_HOST
-              value: db
+              value: mongo
             - name: MONGO_PORT
               value: "27017"
             - name: MONGO_USERNAME
