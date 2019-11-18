@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: consumer
+  annotations:
+    description: Consumer Deployment with RollingUpdate Change
+    commit_id: kgfdsdfdwewds3212j
 spec:
   selector:
     matchLabels:

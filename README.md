@@ -180,10 +180,14 @@ serviceaccount/calico-node created
 deployment.apps/calico-kube-controllers created
 serviceaccount/calico-kube-controllers created
 ```
-
+## Deploy dashboard
+```
+kubectl apply -f dashboard.yml
+```
 ## **Start deploying applications**
 ### Go to see [orchestration](beginner/k8s/) :
 
 #https://www.youtube.com/watch?v=_wySvT2uqyM&list=PLbzoR-pLrL6pzA9DX7Jgo0I-CPE8HU0G_
 #https://kubedex.com/
 #http://kubernetesbyexample.com/
+#https://www.cncf.io/webinars/?_project=kubernetes

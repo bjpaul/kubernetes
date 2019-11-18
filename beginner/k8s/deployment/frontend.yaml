@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
+  annotations:
+    description: Frontend Deployment with RollingUpdate Change
+    commit_id: kgfdsdfsd212j
 spec:
   selector:
     matchLabels:
@@ -43,7 +46,9 @@ spec:
               # httpHeaders:
               # - name: Custom-Header
               #   value: Awesome
-            initialDelaySeconds: 30 # default is 0
+            # it is recommended to allow enough time for the Readiness Probe to possibly fail a few times before a pass,
+            # and only then check the Liveness Probe.
+            initialDelaySeconds: 75 # default is 0
             periodSeconds: 30 #default is 10
             timeoutSeconds: 5 #default is 1
             successThreshold: 1 # default is 1

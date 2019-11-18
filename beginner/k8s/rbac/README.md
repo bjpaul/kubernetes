@@ -1,3 +1,7 @@
+###Ref: https://www.cncf.io/blog/2018/08/01/demystifying-rbac-in-kubernetes/
+https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/
+https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+
 ## Genrate Private Key
 ```
 ~$ openssl genrsa -out developer.key 2048
@@ -11,6 +15,7 @@ e is 65537 (0x10001)
 ```
 ~$ openssl req -new -key developer.key -out developer.csr  -subj "/CN=developer/O=xyz"
 ```
+### CN=user and O=group
 
 ## Encode CSR and use the encoded format in the signing-request.yaml file
 ```
@@ -119,7 +124,29 @@ users:
 
 ## Now try to access all pods of dev namespace as the new developer user
 ```
-~ $ kubectl --context=developer get pods -n dev
+~ $ kubectl --context=developer get pods
 
 Error from server (Forbidden): pods is forbidden: User "developer" cannot list resource "pods" in API group "" in the namespace "dev"
+```
+
+## Give permission to developer user
+```
+~ $ kubectl apply -f role.yaml -n dev
+
+role.rbac.authorization.k8s.io/pod-reader created
+
+~ $ kubectl apply -f rolebinding.yaml -n dev
+
+rolebinding.rbac.authorization.k8s.io/pod-read-access created
+
+~ $ kubectl --context=developer get pods
+
+NAME                        READY   STATUS    RESTARTS   AGE
+consumer-5c8477dcfd-57c6v   1/1     Running   0          127m
+frontend-86984f8c5-lkn6g    1/1     Running   0          127m
+mongo-64f5dfd77d-mrgjk      1/1     Running   0          128m
+queue-6949774487-b2j4j      1/1     Running   0          128m
+reader-db68d84ff-gs2hj      1/1     Running   0          127m
+web-6d65df89c4-j9lxs        1/1     Running   3          127m
+writer-85d9c87bdd-vgs9m     1/1     Running   0          127m
 ```
