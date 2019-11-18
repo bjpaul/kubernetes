@@ -7,12 +7,11 @@ spec:
   selector:
     app: cache
   ports:
-    - name: tcp
+    - name: http
       protocol: TCP
       port: 6379
       targetPort: 6379
   type: ClusterIP
-  
 ---
 apiVersion: apps/v1 
 kind: Deployment
@@ -39,18 +38,18 @@ spec:
             - redis-server
             - "/redis-master/redis.conf"
           env:
-          - name: MASTER
-            value: "true"
+            - name: MASTER
+              value: "true"
           ports:
-          - containerPort: 6379
+            - containerPort: 6379
           resources:
             limits:
               cpu: "0.1"
           volumeMounts:
-          - mountPath: /redis-master-data
-            name: data
-          - mountPath: /redis-master
-            name: config
+            - mountPath: /redis-master-data
+              name: data
+            - mountPath: /redis-master
+              name: config
         volumes:
           - name: data
             emptyDir: {}
@@ -58,5 +57,5 @@ spec:
             configMap:
               name: example-redis-config
               items:
-              - key: redis-config
-                path: redis.conf
+                - key: redis-config
+                  path: redis.conf
