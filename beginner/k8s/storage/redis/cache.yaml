@@ -49,13 +49,13 @@ spec:
             - mountPath: /redis-master-data
               name: data
             - mountPath: /redis-master
-              name: config
-        volumes:
-          - name: data
-            emptyDir: {}
-          - name: config
-            configMap:
-              name: example-redis-config
-              items:
-                - key: redis-config
-                  path: redis.conf
+              name: redisconfig
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: redisconfig
+          configMap:
+            name: example-redis-config
+            items:
+              - key: redis-config
+                path: redis.conf
