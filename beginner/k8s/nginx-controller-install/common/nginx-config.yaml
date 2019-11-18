@@ -4,8 +4,8 @@ metadata:
   name: nginx-config
   namespace: nginx-ingress
   labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/name: nginx-config
+    app.kubernetes.io/part-of: nginx-ingress
 data:
   ssl_session_cache: "shared:SSL:50m"
   ssl_session_timeout: "1d"
@@ -20,6 +20,6 @@ data:
   send_timeout: "600"
   proxy_buffers: "8 32k"
   proxy_buffer_size: "64k"
-  proxy-set-headers: "ingress-nginx/nginx-proxy-headers"
+  proxy-set-headers: "nginx-ingress/nginx-proxy-headers"
   
    

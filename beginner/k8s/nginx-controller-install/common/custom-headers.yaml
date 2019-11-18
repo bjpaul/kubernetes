@@ -7,8 +7,8 @@ data:
   Host: "http_host"
   X-Forwarded-For: "$proxy_add_x_forwarded_for"
   Upgrade: "$http_upgrade"
-  Connection: "'upgrade'"
+  Connection: "upgrade"
 kind: ConfigMap
 metadata:
   name: nginx-proxy-headers
-  namespace: ingress-nginx
+  namespace: nginx-ingress

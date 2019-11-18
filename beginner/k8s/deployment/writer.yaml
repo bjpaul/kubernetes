@@ -73,7 +73,7 @@ spec:
             - name: API_PATH
               value: /writer
             - name: MONGO_HOST
-              value: db
+              value: mongo
             - name: MONGO_PORT
               value: "27017"
             - name: MONGO_USERNAME
