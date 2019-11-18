@@ -1,0 +1,40 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: reader-sg
+spec:
+  podSelector:
+    matchLabels:
+      app: reader
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          type: ingress
+    - podSelector:
+        matchLabels:
+          app-type: backend
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          name: db
+    ports:
+    - protocol: TCP
+      port: 27017
+  - to:
+    - podSelector:
+        matchLabels:
+          name: queue
+    ports:
+    - protocol: TCP
+      port: 15672
+    - protocol: TCP
+      port: 5672

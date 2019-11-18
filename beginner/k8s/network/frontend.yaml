@@ -2,21 +2,19 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: queue-sg
+  name: frontend-sg
 spec:
   podSelector:
     matchLabels:
-      app: amqp
+      app: frontend
   policyTypes:
   - Ingress
   - Egress
   ingress:
   - from:
-    - podSelector:
+    - namespaceSelector:
         matchLabels:
-          app-type: backend
+          type: ingress
     ports:
     - protocol: TCP
-      port: 15672
-    - protocol: TCP
-      port: 5672
+      port: 3000
