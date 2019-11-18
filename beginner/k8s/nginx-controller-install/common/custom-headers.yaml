@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  X-Forwarded-Host: "$host"
+  X-Forwarded-Proto: "$scheme"
+  X-Real-IP: "$remote_addr"
+  X-Forwarded-Server: "$host"
+  Host: "http_host"
+  X-Forwarded-For: "$proxy_add_x_forwarded_for"
+  Upgrade: "$http_upgrade"
+  Connection: "'upgrade'"
+kind: ConfigMap
+metadata:
+  name: nginx-proxy-headers
+  namespace: ingress-nginx
