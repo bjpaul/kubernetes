@@ -1,3 +1,5 @@
+https://kubernetes.github.io/ingress-nginx
+
 https://github.com/nginxinc/kubernetes-ingress/blob/master/docs/installation.md
 https://github.com/nginxinc/kubernetes-ingress/
 
@@ -25,4 +27,9 @@ NAME                    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        
 service/nginx-ingress   NodePort   10.98.189.127   <none>        80:32058/TCP,443:30744/TCP   5m53s   app=nginx-ingress
 
 #kubectl get clusterrole,clusterrolebinding,pods,deploy,daemonset,svc --namespace=nginx-ingress -o wide
+```
+
+### the ingress claass overrided in the deployment/nginx-ingress.yaml file:
+```
+nginx-ingress-class=my-custom-ingress
 ```

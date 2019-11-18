@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: base-ingress
   annotations:
-    # kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/ingress.class: "my-custom-ingress"
     nginx.org/ssl-services: "ssl-svc"
     nginx.org/websocket-services: "ws-svc"
     nginx.com/health-checks: "true"
