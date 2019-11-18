@@ -1,6 +1,7 @@
 ##Optional
 ```
 kubectl delete -f ../service/nodeport/web.yml -n dev
+kubectl delete -f ../deployment/web.yaml -n dev
 ```
 https://kubernetes.github.io/ingress-nginx
 
