@@ -3,7 +3,8 @@ kubectl label nodes <node-name> node-role.kubernetes.io/node=app
 
 
 kubectl apply -f namespace.yaml
-kubectl apply -f -R storage/ --namespace=dev
+kubectl apply -f storage/ -R  --namespace=dev 
+cd storage/redis && kubectl apply -k ./ -n dev
 kubectl apply -f network/ --namespace=dev
 
 #kubectl delete secret my-app-certs -n dev
