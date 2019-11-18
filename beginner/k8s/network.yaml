@@ -1,0 +1,46 @@
+# Default Deny for all
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: default-deny-all
+# spec:
+#   podSelector: {}
+#   policyTypes:
+#   - Ingress
+#   - Egress
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: db
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    # - ipBlock:
+    #     cidr: 192.168.0.0/16
+        # except:
+        # - 172.17.1.0/24
+    # - namespaceSelector:
+    #     matchLabels:
+    #       project: myproject
+    - podSelector:
+        matchLabels:
+          app-type: backend
+    ports:
+    - protocol: TCP
+      port: 27017
+  # egress:
+  # - to:
+  #   - ipBlock:
+  #       cidr: 10.0.0.0/24
+  #   ports:
+  #   - protocol: TCP
+  #     port: 5978
