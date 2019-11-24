@@ -1,0 +1,6 @@
+dependencies:
+- name: ingress
+  repository: https://bjpaul.github.io/chart
+  version: 0.1.0
+digest: sha256:5956b4b83bcfb2cbb901701babb1afad0e6c175146121be3ee763be274d49944
+generated: "2019-11-24T23:42:27.709888+05:30"

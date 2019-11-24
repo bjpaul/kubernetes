@@ -1,1 +1,23 @@
-
+apiVersion: v1
+entries:
+  frontend:
+  - apiVersion: v1
+    appVersion: advance
+    created: "2019-11-24T23:48:08.75425+05:30"
+    description: The Helm chart for frontend deployment and service
+    digest: 1be79aab4a3518410b1860882b55a3d14b67d3a812c62b6445980f19e098eb23
+    keywords:
+    - frontend
+    - react
+    - ui
+    kubeVersion: 1.16.3
+    maintainers:
+    - email: work.bijoypaul@gmail.com
+      name: Bijoy Paul
+    name: frontend
+    sources:
+    - https://github.com/bjapul/chart/k8s/beginner/frontend
+    urls:
+    - https://bjpaul.github.io/chart/frontend-0.1.0.tgz
+    version: 0.1.0
+generated: "2019-11-24T23:48:08.751575+05:30"
