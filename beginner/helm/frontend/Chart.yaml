@@ -1,0 +1,18 @@
+apiVersion: v1
+version: 0.1.0
+appVersion: advance
+name: frontend
+kubeVersion: 1.16.3
+description: The Helm chart for frontend deployment and service
+keywords:
+- frontend
+- react
+- ui
+# home: http://www.wordpress.com/
+# icon: https://bitnami.com/assets/stacks/wordpress/img/wordpress-stack-220x234.png
+sources:
+- https://github.com/bjapul/chart/k8s/beginner/frontend
+maintainers:
+- email: work.bijoypaul@gmail.com
+  name: Bijoy Paul
+# type: application/library

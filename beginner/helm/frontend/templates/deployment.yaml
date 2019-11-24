@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "frontend.fullname" . }}
+  labels:
+{{ include "frontend.labels" . | indent 4 }}
+    app.kubernetes.io/release: {{ .Release.Name | quote }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "frontend.name" . }}
+      app.kubernetes.io/version: {{ .Chart.Version }}
+      app.kubernetes.io/release: {{ .Release.Name | quote }}
+  template:
+    metadata:
+      name: {{ include "frontend.fullname" . }}
+      labels:
+        app.kubernetes.io/name: {{ include "frontend.name" . }}
+        app.kubernetes.io/version: {{ .Chart.Version }}
+        app.kubernetes.io/release: {{ .Release.Name | quote }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ template "frontend.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 75 # default is 0
+            periodSeconds: 30 #default is 10
+            timeoutSeconds: 5 #default is 1
+            successThreshold: 1 # default is 1
+            failureThreshold: 3 # default is 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10 # default is 0
+            periodSeconds: 5 #default is 10
+            timeoutSeconds: 5 #default is 1
+            successThreshold: 3 # default is 1
+            failureThreshold: 5 # default is 3
+      nodeSelector:
+        node-role.kubernetes.io/node: app
