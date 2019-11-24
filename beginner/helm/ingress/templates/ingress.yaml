@@ -1,17 +1,12 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "frontend.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
-{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+{{- $fullName := include "ingress.name" . -}}
 apiVersion: networking.k8s.io/v1beta1
-{{- else -}}
-apiVersion: extensions/v1beta1
-{{- end }}
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
     app.kubernetes.io/release: {{ .Release.Name | quote }}
-{{ include "frontend.labels" . | indent 4 }}
+{{ include "ingress.labels" . | indent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -24,7 +19,7 @@ spec:
       {{- range .hosts }}
         - {{ . | quote }}
       {{- end }}
-      secretName: {{ .secretName }}
+      secretName: {{ .secret.name }}
   {{- end }}
 {{- end }}
   rules:
@@ -33,10 +28,10 @@ spec:
       http:
         paths:
         {{- range .paths }}
-          - path: {{ . }}
+          - path: {{ .path }}
             backend:
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+              serviceName: {{ .service }}
+              servicePort: {{ .port }}
         {{- end }}
   {{- end }}
 {{- end }}

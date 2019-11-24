@@ -1,0 +1,17 @@
+apiVersion: v1
+version: 0.1.0
+appVersion: ingress
+name: ingress
+kubeVersion: 1.16.3
+description: The Helm chart for ingress deployment and secrets
+keywords:
+- ingress
+- nginx-ingress
+# home: http://www.wordpress.com/
+# icon: https://bitnami.com/assets/stacks/wordpress/img/wordpress-stack-220x234.png
+sources:
+- https://github.com/bjapul/chart/k8s/beginner/ingress
+maintainers:
+- email: work.bijoypaul@gmail.com
+  name: Bijoy Paul
+# type: application/library
