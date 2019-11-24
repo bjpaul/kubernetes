@@ -3,7 +3,26 @@ entries:
   frontend:
   - apiVersion: v1
     appVersion: advance
-    created: "2019-11-24T23:48:08.75425+05:30"
+    created: "2019-11-25T00:27:58.538892+05:30"
+    description: The Helm chart for frontend deployment and service
+    digest: b575a80b5c4be1d194431de701b6f40255c6aa1d329ab42fcd206e3ebf36f020
+    keywords:
+    - frontend
+    - react
+    - ui
+    kubeVersion: 1.16.3
+    maintainers:
+    - email: work.bijoypaul@gmail.com
+      name: Bijoy Paul
+    name: frontend
+    sources:
+    - https://github.com/bjapul/chart/k8s/beginner/frontend
+    urls:
+    - https://bjpaul.github.io/chart/frontend-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v1
+    appVersion: advance
+    created: "2019-11-25T00:27:58.538254+05:30"
     description: The Helm chart for frontend deployment and service
     digest: 1be79aab4a3518410b1860882b55a3d14b67d3a812c62b6445980f19e098eb23
     keywords:
@@ -20,4 +39,23 @@ entries:
     urls:
     - https://bjpaul.github.io/chart/frontend-0.1.0.tgz
     version: 0.1.0
-generated: "2019-11-24T23:48:08.751575+05:30"
+  ingress:
+  - apiVersion: v1
+    appVersion: ingress
+    created: "2019-11-25T00:27:58.539281+05:30"
+    description: The Helm chart for ingress deployment and secrets
+    digest: f3ecd717f36b79e2a2a0e4436b00e2b953730607787bbb8e7be523cbcc95d8e2
+    keywords:
+    - ingress
+    - nginx-ingress
+    kubeVersion: 1.16.3
+    maintainers:
+    - email: work.bijoypaul@gmail.com
+      name: Bijoy Paul
+    name: ingress
+    sources:
+    - https://github.com/bjapul/chart/k8s/beginner/ingress
+    urls:
+    - https://bjpaul.github.io/chart/ingress-0.1.1.tgz
+    version: 0.1.1
+generated: "2019-11-25T00:27:58.536735+05:30"
